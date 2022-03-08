@@ -5,3 +5,8 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp
+
+HEADERS += \
+    EStackEmpty.h \
+    EStackException.h \
+    Stack.h
