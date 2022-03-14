@@ -17,6 +17,18 @@ public:
         top = nullptr;
         size = 0;
     }
+    Stack(const Stack<T> & S) {
+        for (int i = S.size; i > 0; i--) {
+            top = nullptr;
+            Node* temp = S.top;
+            for (int j = 0; j < i; j++) {
+                temp = temp->next;
+            }
+            Node* newNode = new Node{temp->key, top};
+            top = newNode;
+        }
+        size = S.size;
+    }
     ~Stack() {
         while (top != nullptr) {
             Node* temp = top;
