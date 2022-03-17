@@ -5,3 +5,12 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp
+
+HEADERS += \
+    EStackEmpty.h \
+    EStackException.h \
+    Person.h \
+    PersonKeeper.h \
+    Stack.h
+
+DISTFILES +=
