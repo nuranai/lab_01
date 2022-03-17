@@ -10,6 +10,7 @@ private:
     string lastName;
     string patronimic;
 public:
+    //кончтрукторы
     Person() {}
     Person(const Person& arg) {
         firstName = arg.getFirstName();
@@ -21,11 +22,20 @@ public:
         lastName = secondArg;
         patronimic = patronimicArg;
     }
+    Person &operator= (Person const& arg) {
+        if (this != &arg){
+            firstName = arg.getFirstName();
+            lastName = arg.getLastName();
+            patronimic = arg.getPatronimic();
+        }
+        return *this;
+    }
     ~Person() {}
+    //получаем полное имя
     string getFullName() {
-        string boop;
-        boop.append(firstName).append(1, ' ').append(lastName).append(1, ' ').append(patronimic);
-        return boop;
+        string fullName;
+        fullName.append(lastName).append(1, ' ').append(firstName).append(1, ' ').append(patronimic);
+        return fullName;
     }
     string getFirstName() const {
         return firstName;

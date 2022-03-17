@@ -20,20 +20,22 @@ public:
             throw "Error: cannot open file";
         }
         string firstName, secondName, patronimic;
+//        записываем именя пока не конец файла
         while (!file.eof()) {
-            file >> firstName >> secondName >> patronimic;
+            file >> secondName >> firstName >> patronimic;
             Person personItem(firstName, secondName, patronimic);
             stack.Push(personItem);
         }
         return stack;
     }
     void writePerson(Stack<Person> stack) {
+//        получаем полный путь до файла и записываем в него стек
         ofstream file("C:\\bamp\\lab_01\\writeFile.txt");
         Stack<Person> stackCopy(stack);
         while (stackCopy.GetSize() > 0) {
             Person personItem = stackCopy.Pop();
             string fullName = personItem.getFullName();
-            file << fullName;
+            file << fullName << endl;
         }
     }
 private:
