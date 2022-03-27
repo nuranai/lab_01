@@ -4,25 +4,26 @@
 #include <string.h>
 
 class EStackException {
-    private:
-        char* message;
-    public:
-        EStackException(const char* arg_message) {
-            size_t length = strlen(arg_message)+1;
-            message = new char[length];
-            strcpy_s(message, length, arg_message);
+public:
+        EStackException(const char* arg_message) { //конструктор
+            size_t length = strlen(arg_message)+1; //получаем длину сообщения
+            message_ = new char[length]; // выделяем память под сообщение
+            strcpy_s(message_, length, arg_message); //сохраняем сообщение
         }
+        // конструктор покирования
         EStackException(const EStackException& exception) {
-            size_t length = strlen(exception.message)+1;
-            message = new char[length];
-            strcpy_s(message, length, exception.message);
+            size_t length = strlen(exception.message_)+1; //получаем длину сообщения
+            message_ = new char[length]; // выделяем память под сообщение
+            strcpy_s(message_, length, exception.message_); //сохраняем сообщение
         }
-        ~EStackException() {
-            delete message;
+        ~EStackException() { //деструктор
+            delete message_;
         }
-        const char* what() {
-            return message;
+        const char* what() const {
+            return message_;
         }
+private:
+    char* message_;
 };
 
 #endif // ESTACKEXCEPTION_H
