@@ -4,6 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        Person.cpp \
+        PersonKeeper.cpp \
+        Stack.cpp \
         main.cpp
 
 HEADERS += \
