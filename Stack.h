@@ -3,76 +3,51 @@
 
 #include "EStackEmpty.h"
 
-//класс узлов
-
+//класс односвязного списка
 template<class T>
 class Node {
 public:
-    T key;
-    Node *next;
+    //конструктор без аргаументов
     Node() {
-        key = nullptr;
-        next = nullptr;
+        key_ = nullptr;
+        next_ = nullptr;
     }
+    //конструктор с аргументами
     Node(T argKey, Node *argNext) {
-        key = argKey;
-        next = argNext;
+        key_ = argKey;
+        next_ = argNext;
     }
+    //метод получения значения
     T GetKey() {
-        return key;
+        return key_;
     }
+    //метод получения предыдудщего звена
+    Node* GetNode() {
+        return next_;
+    }
+private:
+    T key_; //значение узла
+    Node *next_; //ссылка на предыдущее звено
 };
 
 template<class T>
 class Stack {
 private:
-    Node<T>* top;
-    int size;
+    Node<T>* top; //полседний элемент стека
+    int size; //резмерность стека
 public:
-    Stack() {
-        top = nullptr;
-        size = 0;
-    }
-    //конструктор копирования
-    Stack(const Stack<T> & S) {
-        top = nullptr;
-        for (int i = S.size; i > 0; i--) {
-            Node<T> *temp = S.top;
-            for (int j = 0; j < i - 1; j++) {
-                temp = temp->next;
-            }
-            Node<T> *newNode = new Node(temp->key, top);
-            top = newNode;
-        }
-        size = S.size;
-    }
-    ~Stack() {
-        while (top != nullptr) {
-            Node<T> *temp = top;
-            top = top->next;
-            delete temp;
-        }
-    }
-    void Push(T item) {
-        Node<T> *newNode = new Node(item, top);
-
-        top = newNode;
-        size++;
-    }
-    const T Pop() {
-        if (top == nullptr) {
-            throw EStackEmpty();
-        }
-        T data = top->key;
-        Node<T> *temp = top;
-        top = top->next;
-        delete temp;
-        size--;
-        return data;
-    }
-    int GetSize() {
-        return size;
-    }
+    //коструктор
+    Stack();
+    //конструкторкопирования
+    Stack(const Stack<T> & S);
+    //деструктор
+    ~Stack();
+    //метод кладущий значение в стек
+    void Push(T item);
+    //метод извлекающий из стека
+    const T Pop();
+    //метод получения размера стека
+    int GetSize();
 };
 
 #endif // STACK_H

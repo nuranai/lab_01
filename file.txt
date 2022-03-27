@@ -1,4 +1,4 @@
-nuranov aidar askarovidh
-sergeev sergey sergeevich
+nuranov		aidar askarovidh
+sergeev sergey 		sergeevich
 ivanov ivan ivanovich
 alekseev aleksey alekseevych

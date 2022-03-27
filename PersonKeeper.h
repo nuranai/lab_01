@@ -1,48 +1,23 @@
 #ifndef PERSONKEEPER_H
 #define PERSONKEEPER_H
+
 #include "Stack.h"
 #include <string>
-#include <fstream>
 #include "Person.h"
 
 using namespace std;
 
 class PersonKeeper {
 public:
-    static PersonKeeper& Instance() {
-        static PersonKeeper p;
-        return p;
-    }
-    Stack<Person> readPerson(string name) {
-        Stack<Person> stack;
-        ifstream file(name);
-        if (!file) {
-            throw "Error: cannot open file";
-        }
-        string firstName, secondName, patronimic;
-//        записываем именя пока не конец файла
-        while (!file.eof()) {
-            file >> secondName >> firstName >> patronimic;
-            Person personItem(firstName, secondName, patronimic);
-            stack.Push(personItem);
-        }
-        return stack;
-    }
-    void writePerson(Stack<Person> stack) {
-//        получаем полный путь до файла и записываем в него стек
-        ofstream file("C:\\bamp\\lab_01\\writeFile.txt");
-        Stack<Person> stackCopy(stack);
-        while (stackCopy.GetSize() > 0) {
-            Person personItem = stackCopy.Pop();
-            string fullName = personItem.getFullName();
-            file << fullName << endl;
-        }
-    }
+    //статический метод в котором хранится единственный экземпляр
+    static PersonKeeper& Instance();
+    //прочитать все ФИО из файла в стек
+    Stack<Person> readPerson(string name);
+    //записать все ФИО из стека в файл
+    void writePerson(string filePath, Stack<Person> stack);
 private:
-    PersonKeeper() {}
-    ~PersonKeeper() {}
-    PersonKeeper(PersonKeeper const&); // реализация не нужна
-    PersonKeeper& operator= (PersonKeeper const&);
+    PersonKeeper();
+    ~PersonKeeper();
 };
 
 #endif // PERSONKEEPER_H
